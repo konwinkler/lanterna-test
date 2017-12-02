@@ -7,6 +7,7 @@ import java.awt.event.KeyListener
 
 class Game {
     def player = new Player()
+    List<Sheep> herd = new ArrayList<>()
     Screen screen
     Map map
 
@@ -14,6 +15,8 @@ class Game {
         this.screen = screen
         this.map = new Map(screen.terminalSize.columns, screen.terminalSize.rows)
         map.initialize()
+
+        herd.add(new Sheep())
 
         drawMap()
     }
@@ -26,34 +29,60 @@ class Game {
         }
     }
 
-    boolean update() {
+    boolean draw() {
         draw(player)
+        draw(herd)
 
+        screen.refresh()
         true
     }
 
-    def draw(Player player) {
-        if(player.isDirty()) {
-            screen.setCharacter(player.x, player.y, map.tiles[player.x][player.y].icon)
-            player.move()
-            screen.setCharacter(player.x, player.y, player.icon)
+    def draw(List<Actor> actors) {
+        actors.each {
+            draw(it)
+        }
+    }
+
+    def draw(Actor actor) {
+        if(actor.isDirty()) {
+            screen.setCharacter(actor.x, actor.y, map.tiles[actor.x][actor.y].icon)
+            actor.move()
+            screen.setCharacter(actor.x, actor.y, actor.icon)
         }
     }
 
     def handleInput(KeyStroke keyStroke) {
+        def progress = false
         switch (keyStroke) {
             case KeyStroke.fromString('w'):
                 player.movement(0, -1)
+                progress = true
                 break
             case KeyStroke.fromString('a'):
                 player.movement(-1, 0)
+                progress = true
                 break
             case KeyStroke.fromString('s'):
                 player.movement(0, 1)
+                progress = true
                 break
             case KeyStroke.fromString('d'):
                 player.movement(1, 0)
+                progress = true
                 break
         }
+
+        if(progress) {
+            herd.each {
+                it.randomMove()
+            }
+        }
     }
+
+    def update() {
+        herd.each {
+            it.update()
+        }
+    }
+
 }

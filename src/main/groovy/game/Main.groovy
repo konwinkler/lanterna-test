@@ -20,10 +20,13 @@ class Main {
 
             def game = new Game(screen)
 
-            while(game.update()) {
-                screen.refresh()
+            while(true) {
 
                 game.handleInput(terminal.pollInput())
+
+                game.update()
+
+                game.draw()
 
                 Thread.sleep(10)
             }

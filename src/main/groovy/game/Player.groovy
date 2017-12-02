@@ -1,28 +1,11 @@
 package game
 
-import com.googlecode.lanterna.TerminalPosition
-import com.googlecode.lanterna.TextCharacter
+class Player extends Actor {
 
-class Player {
-
-    TextCharacter icon = new TextCharacter('@' as char)
-    int x = 0
-    int y = 0
-    private int offsetX
-    private int offsetY
-    boolean dirty = true
-
-    def movement(int x, int y) {
-        this.offsetX = x
-        this.offsetY = y
-        dirty = true
+    Player(int x = 10, int y = 5) {
+        this.x = x
+        this.y = y
     }
 
-    def move() {
-        this.x += offsetX
-        this.y += offsetY
-        offsetX = 0
-        offsetY = 0
-        dirty = false
-    }
+
 }
