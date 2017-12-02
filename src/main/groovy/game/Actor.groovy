@@ -3,8 +3,7 @@ package game
 import com.googlecode.lanterna.TextCharacter
 import com.googlecode.lanterna.TextColor
 
-class Actor {
-    TextCharacter icon = new TextCharacter('@' as char)
+class Actor extends Drawable {
     int x = 0
     int y = 0
     private int offsetX
@@ -12,10 +11,8 @@ class Actor {
     boolean dirty = true
     protected boolean captured = false
 
-    def movement(int x, int y) {
-        this.offsetX = x
-        this.offsetY = y
-        dirty = true
+    Actor() {
+        icon = new TextCharacter('@' as char)
     }
 
     def movement(Position position) {
@@ -24,7 +21,7 @@ class Actor {
         dirty = true
     }
 
-    def executeMovement() {
+    def executeMovement(Map map) {
         this.x += offsetX
         this.y += offsetY
         offsetX = 0

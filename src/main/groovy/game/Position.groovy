@@ -15,4 +15,11 @@ class Position {
                 && Math.abs(y - other.y) <= 1)
     }
 
+    Position withX(int n) {
+        new Position(x + n, this.y)
+    }
+
+    Position withY(int n) {
+        new Position(x, y + n)
+    }
 }

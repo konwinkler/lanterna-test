@@ -10,10 +10,10 @@ class Map {
                  '                                                   ',
                  '                                                   ',
                  '                                           ####### ',
-                 '                                           #     # ',
-                 '                                                 # ',
-                 '                                                 # ',
-                 '                                           #     # ',
+                 '                                           #^^^^^# ',
+                 '                                            ^^^^^# ',
+                 '                                            ^^^^^# ',
+                 '                                           #^^^^^# ',
                  '                                           ####### ',
                  '                                                   ',
                  '                                                   ',
@@ -36,7 +36,7 @@ class Map {
                 if(s!=null && s.length() > x) {
                     c = s.charAt(x)
                 }
-                tiles[x][y] = new Tile(c)
+                tiles[x][y] = Tile.scan(c)
             }
         }
     }

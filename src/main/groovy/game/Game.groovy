@@ -44,8 +44,9 @@ class Game {
     def draw(Actor actor) {
         if(actor.isDirty()) {
             //BUG: what if there is a different actor on that tile?
+            //Or can we not walk into other actors?
             screen.setCharacter(actor.x, actor.y, map.tiles[actor.x][actor.y].icon)
-            actor.executeMovement()
+            actor.executeMovement(map)
             screen.setCharacter(actor.x, actor.y, actor.icon)
             actor.dirty = false
         }
@@ -55,19 +56,19 @@ class Game {
         def progress = false
         switch (keyStroke) {
             case KeyStroke.fromString('w'):
-                player.movement(0, -1)
+                player.movement(player.position.withY(-1))
                 progress = true
                 break
             case KeyStroke.fromString('a'):
-                player.movement(-1, 0)
+                player.movement(player.position.withX(-1))
                 progress = true
                 break
             case KeyStroke.fromString('s'):
-                player.movement(0, 1)
+                player.movement(player.position.withY(1))
                 progress = true
                 break
             case KeyStroke.fromString('d'):
-                player.movement(1, 0)
+                player.movement(player.position.withX(1))
                 progress = true
                 break
             case KeyStroke.fromString('l'):

@@ -4,7 +4,7 @@ class Player extends Actor {
 
     List<Actor> followers = new LinkedList<>()
 
-    Player(int x = 10, int y = 5) {
+    Player(int x = 30, int y = 5) {
         this.x = x
         this.y = y
     }
@@ -14,8 +14,15 @@ class Player extends Actor {
     }
 
     @Override
-    def movement(int x, int y) {
-        super.movement(x, y)
+    def executeMovement(Map map) {
+        super.executeMovement(map)
+
+        this.setBackground(map.tiles[x][y].icon.backgroundColor)
+    }
+
+    @Override
+    def movement(Position position) {
+        super.movement(position)
 
         followers.each {
             it.movement(this.position)
