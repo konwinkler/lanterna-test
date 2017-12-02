@@ -3,8 +3,6 @@ package game
 import com.googlecode.lanterna.input.KeyStroke
 import com.googlecode.lanterna.screen.Screen
 
-import java.awt.event.KeyListener
-
 class Game {
     def player = new Player()
     List<Sheep> herd = new ArrayList<>()
@@ -45,9 +43,11 @@ class Game {
 
     def draw(Actor actor) {
         if(actor.isDirty()) {
+            //BUG: what if there is a different actor on that tile?
             screen.setCharacter(actor.x, actor.y, map.tiles[actor.x][actor.y].icon)
-            actor.move()
+            actor.executeMovement()
             screen.setCharacter(actor.x, actor.y, actor.icon)
+            actor.dirty = false
         }
     }
 
@@ -70,12 +70,29 @@ class Game {
                 player.movement(1, 0)
                 progress = true
                 break
+            case KeyStroke.fromString('l'):
+                catchAnimal()
+                progress = true
+                break
         }
 
         if(progress) {
             herd.each {
                 it.randomMove()
             }
+        }
+    }
+
+    def catchAnimal() {
+        if(player.followers.empty) {
+            herd.each {
+                if (player.position.adjacent(it.position)) {
+                    it.capture(player)
+                }
+            }
+        } else {
+            // release followers
+            player.releaseFollowers()
         }
     }
 

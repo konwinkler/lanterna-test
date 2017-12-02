@@ -1,10 +1,12 @@
 package game
 
-import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextCharacter
+import com.googlecode.lanterna.TextColor;
 
 class Sheep extends Actor {
 
-    Sheep(int x = 5, int y = 5) {
+
+    Sheep(int x = 9, int y = 5) {
         this.x = x
         this.y = y
 
@@ -12,6 +14,10 @@ class Sheep extends Actor {
     }
 
     def randomMove() {
+        if(captured) {
+            return
+        }
+
         // do a random movement
         switch (new Random().nextInt(4)) {
             case 0:
@@ -28,5 +34,6 @@ class Sheep extends Actor {
                 break
         }
     }
+
 
 }

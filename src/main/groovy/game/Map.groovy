@@ -4,9 +4,20 @@ class Map {
     int height
     int width
     Tile[][] tiles
-    def input = ['# # ### #   #    ###',
-                 '### #   #   #    # #',
-                 '# # ### ### ###  ###']
+    def input = ['                                                   ',
+                 '                                                   ',
+                 '                                                   ',
+                 '                                                   ',
+                 '                                                   ',
+                 '                                           ####### ',
+                 '                                           #     # ',
+                 '                                                 # ',
+                 '                                                 # ',
+                 '                                           #     # ',
+                 '                                           ####### ',
+                 '                                                   ',
+                 '                                                   ',
+                 '                                                   ']
 
     Map(int width, int height) {
         this.width = width
