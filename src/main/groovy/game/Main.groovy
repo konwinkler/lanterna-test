@@ -1,5 +1,7 @@
 package game
 
+import com.googlecode.lanterna.TextColor
+import com.googlecode.lanterna.graphics.TextGraphics
 import com.googlecode.lanterna.screen.Screen
 import com.googlecode.lanterna.screen.TerminalScreen
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory
@@ -20,7 +22,7 @@ class Main {
 
             def game = new Game(screen)
 
-            while(true) {
+            while(!game.isWon()) {
 
                 game.handleInput(terminal.pollInput())
 
@@ -31,6 +33,11 @@ class Main {
                 Thread.sleep(10)
             }
 
+            screen.clear()
+            TextGraphics textGraphics = screen.newTextGraphics()
+            textGraphics.setForegroundColor(TextColor.ANSI.RED)
+            textGraphics.putString(10, 5, "You Win!")
+            screen.refresh()
 
         } catch (Exception e) {
             e.printStackTrace()

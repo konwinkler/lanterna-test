@@ -103,4 +103,13 @@ class Game {
         }
     }
 
+    boolean isWon() {
+        for(Actor actor : herd) {
+            if(!map.getTileAt(actor.position).goal) {
+                return false
+            }
+        }
+
+        return true
+    }
 }

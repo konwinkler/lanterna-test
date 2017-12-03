@@ -41,4 +41,7 @@ class Map {
         }
     }
 
+    def getTileAt(Position position) {
+        return tiles[position.x][position.y]
+    }
 }
