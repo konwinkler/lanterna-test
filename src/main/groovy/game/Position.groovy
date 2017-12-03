@@ -22,4 +22,17 @@ class Position {
     Position withY(int n) {
         new Position(x, y + n)
     }
+
+    @Override
+    boolean equals(Object obj) {
+        if (obj == null) {
+            return false
+        }
+        if (getClass() != obj.getClass()) {
+            return false
+        }
+        final Position other = (Position) obj
+
+        return this.x == other.x && this.y == other.y
+    }
 }

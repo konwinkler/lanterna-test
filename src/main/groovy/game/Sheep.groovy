@@ -6,7 +6,8 @@ import com.googlecode.lanterna.TextColor;
 class Sheep extends Actor {
 
 
-    Sheep(int x = 29, int y = 5) {
+    Sheep(Game game, int x = 29, int y = 5) {
+        super(game)
         this.x = x
         this.y = y
 

@@ -6,6 +6,7 @@ import com.googlecode.lanterna.TextColor
 class Tile extends Drawable {
 
     boolean goal = false
+    boolean passable = true
 
     Tile(Character c) {
         if(c != null) {
@@ -19,6 +20,10 @@ class Tile extends Drawable {
                 def t = new Tile(' ' as char)
                 t.setBackground(TextColor.ANSI.YELLOW)
                 t.goal = true
+                return t
+            case '#':
+                def t = new Tile('#' as char)
+                t.passable = false
                 return t
             default:
                 return new Tile(c)

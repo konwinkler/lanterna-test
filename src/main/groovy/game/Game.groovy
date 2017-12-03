@@ -4,7 +4,7 @@ import com.googlecode.lanterna.input.KeyStroke
 import com.googlecode.lanterna.screen.Screen
 
 class Game {
-    def player = new Player()
+    Player player
     List<Sheep> herd = new ArrayList<>()
     Screen screen
     Map map
@@ -14,13 +14,14 @@ class Game {
         this.map = new Map(screen.terminalSize.columns, screen.terminalSize.rows)
         map.initialize()
 
-        herd.add(new Sheep())
+        player = new Player(this)
+        herd.add(new Sheep(this))
 
         drawMap()
     }
 
     def drawMap() {
-        for(int x=0; x<map.width; x++) {
+        for(int x=0; x < map.width; x++) {
             for (int y = 0; y < map.height; y++) {
                 screen.setCharacter(x, y, map.tiles[x][y].icon)
             }
@@ -46,7 +47,7 @@ class Game {
             //BUG: what if there is a different actor on that tile?
             //Or can we not walk into other actors?
             screen.setCharacter(actor.x, actor.y, map.tiles[actor.x][actor.y].icon)
-            actor.executeMovement(map)
+            actor.executeMovement()
             screen.setCharacter(actor.x, actor.y, actor.icon)
             actor.dirty = false
         }
@@ -111,5 +112,13 @@ class Game {
         }
 
         return true
+    }
+
+    List<Actor> getActors() {
+        def l = new LinkedList()
+        l.add(player)
+        l.addAll(herd)
+
+        return l
     }
 }

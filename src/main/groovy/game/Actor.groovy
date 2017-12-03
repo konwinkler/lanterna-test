@@ -10,18 +10,35 @@ class Actor extends Drawable {
     private int offsetY
     boolean dirty = true
     protected boolean captured = false
+    Game game
 
-    Actor() {
+    Actor(Game game) {
         icon = new TextCharacter('@' as char)
+        this.game = game
     }
 
-    def movement(Position position) {
+    boolean movement(Position position) {
+        if(!game.map.getTileAt(position).passable) {
+            return false
+        }
+        for(Actor actor : game.actors) {
+            if(actor.futurePosition == position) {
+                return false
+            }
+        }
+
         this.offsetX = position.x - x
         this.offsetY = position.y - y
         dirty = true
+
+        return true
     }
 
-    def executeMovement(Map map) {
+    Position getFuturePosition() {
+        new Position(x + offsetX, y + offsetY)
+    }
+
+    def executeMovement() {
         this.x += offsetX
         this.y += offsetY
         offsetX = 0
