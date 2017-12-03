@@ -1,6 +1,5 @@
 package game
 
-import com.googlecode.lanterna.TextCharacter
 import com.googlecode.lanterna.TextColor
 
 class Actor extends Drawable {
@@ -13,7 +12,6 @@ class Actor extends Drawable {
     Game game
 
     Actor(Game game) {
-        icon = new TextCharacter('@' as char)
         this.game = game
     }
 

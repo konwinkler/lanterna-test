@@ -1,17 +1,25 @@
 package game
 
+import com.googlecode.lanterna.TextCharacter
+
 class Player extends Actor {
 
     List<Actor> followers = new LinkedList<>()
+    static Character symbol = '@'
 
     Player(Game game, int x = 30, int y = 5) {
         super(game)
+        icon = new TextCharacter(symbol)
         this.x = x
         this.y = y
     }
 
     def addFollower(Actor actor) {
         this.followers.add(actor)
+    }
+
+    static boolean scan(Character c) {
+        return c == symbol
     }
 
     @Override

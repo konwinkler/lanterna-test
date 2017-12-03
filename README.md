@@ -12,4 +12,5 @@
 
 ### TODO:
 
+- set player and sheep in map string
 - reset level if sheep is in capture area

@@ -11,8 +11,8 @@ class Map {
                  '                                                   ',
                  '                                           ####### ',
                  '                                           #^^^^^# ',
-                 '                                            ^^^^^# ',
-                 '                                            ^^^^^# ',
+                 '                          @                 ^^^^^# ',
+                 '                       S                    ^^^^^# ',
                  '                                           #^^^^^# ',
                  '                                           ####### ',
                  '                                                   ',
@@ -25,7 +25,7 @@ class Map {
         tiles = new Tile[width][height]
     }
 
-    def initialize() {
+    def initialize(Game game) {
         for(int x=0; x<width; x++) {
             for (int y = 0; y < height; y++) {
                 String s = null
@@ -36,7 +36,17 @@ class Map {
                 if(s!=null && s.length() > x) {
                     c = s.charAt(x)
                 }
-                tiles[x][y] = Tile.scan(c)
+                if(Player.scan(c)) {
+                    game.player = new Player(game, x, y)
+                    tiles[x][y] = Tile.scan(' ' as char)
+                }
+                else if(Sheep.scan(c)) {
+                    game.herd.add(new Sheep(game, x, y))
+                    tiles[x][y] = Tile.scan(' ' as char)
+                }
+                else {
+                    tiles[x][y] = Tile.scan(c)
+                }
             }
         }
     }

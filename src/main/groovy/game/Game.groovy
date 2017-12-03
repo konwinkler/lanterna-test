@@ -12,11 +12,7 @@ class Game {
     Game(Screen screen) {
         this.screen = screen
         this.map = new Map(screen.terminalSize.columns, screen.terminalSize.rows)
-        map.initialize()
-
-        player = new Player(this)
-        herd.add(new Sheep(this))
-
+        map.initialize(this)
         drawMap()
     }
 

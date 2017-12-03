@@ -4,14 +4,18 @@ import com.googlecode.lanterna.TextCharacter
 import com.googlecode.lanterna.TextColor;
 
 class Sheep extends Actor {
+    static Character symbol = 'S'
 
-
-    Sheep(Game game, int x = 29, int y = 5) {
+    Sheep(Game game, int x = (new Random().nextInt(30)), int y = (new Random().nextInt(10))) {
         super(game)
         this.x = x
         this.y = y
 
-        this.icon = new TextCharacter('S' as char)
+        this.icon = new TextCharacter(symbol)
+    }
+
+    static boolean scan(Character c) {
+        return c == symbol
     }
 
     def randomMove() {
