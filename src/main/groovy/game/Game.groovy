@@ -12,7 +12,7 @@ class Game {
     Game(Screen screen) {
         this.screen = screen
         this.map = new Map(screen.terminalSize.columns, screen.terminalSize.rows)
-        map.initialize(this)
+        map.initialize(this, Levels.one)
         drawMap()
     }
 
@@ -51,6 +51,14 @@ class Game {
 
     def handleInput(KeyStroke keyStroke) {
         def progress = false
+        int count = 1
+
+        if(keyStroke?.isShiftDown()) {
+            println("Shift!")
+            count = 5
+        }
+
+        // not able to loop over count here
         switch (keyStroke) {
             case KeyStroke.fromString('w'):
                 player.movement(player.position.withY(-1))

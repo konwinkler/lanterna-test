@@ -4,20 +4,6 @@ class Map {
     int height
     int width
     Tile[][] tiles
-    def input = ['                                                   ',
-                 '                                                   ',
-                 '                                                   ',
-                 '                                                   ',
-                 '                                                   ',
-                 '                                           ####### ',
-                 '                                           #^^^^^# ',
-                 '                          @                 ^^^^^# ',
-                 '                       S                    ^^^^^# ',
-                 '                                           #^^^^^# ',
-                 '                                           ####### ',
-                 '                                                   ',
-                 '                                                   ',
-                 '                                                   ']
 
     Map(int width, int height) {
         this.width = width
@@ -25,13 +11,13 @@ class Map {
         tiles = new Tile[width][height]
     }
 
-    def initialize(Game game) {
+    def initialize(Game game, List<String> level) {
         for(int x=0; x<width; x++) {
             for (int y = 0; y < height; y++) {
                 String s = null
                 def c = null
-                if(input.size() > y) {
-                    s = input.get(y)
+                if(level.size() > y) {
+                    s = level.get(y)
                 }
                 if(s!=null && s.length() > x) {
                     c = s.charAt(x)
