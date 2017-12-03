@@ -20,17 +20,23 @@ class Main {
 
             screen.setCursorPosition(null)
 
-            def game = new Game(screen)
+            Iterator<List> it = Levels.all.iterator()
+            while(it.hasNext()) {
+                screen.clear()
+                screen.refresh()
 
-            while(!game.isWon()) {
+                def game = new Game(screen, it.next())
 
-                game.handleInput(terminal.pollInput())
+                while (!game.isWon()) {
 
-                game.update()
+                    game.handleInput(terminal.pollInput())
 
-                game.draw()
+                    game.update()
 
-                Thread.sleep(10)
+                    game.draw()
+
+                    Thread.sleep(10)
+                }
             }
 
             screen.clear()

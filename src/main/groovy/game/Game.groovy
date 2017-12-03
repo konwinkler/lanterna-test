@@ -9,10 +9,10 @@ class Game {
     Screen screen
     Map map
 
-    Game(Screen screen) {
+    Game(Screen screen, List<String> level) {
         this.screen = screen
         this.map = new Map(screen.terminalSize.columns, screen.terminalSize.rows)
-        map.initialize(this, Levels.one)
+        map.initialize(this, level)
         drawMap()
     }
 
