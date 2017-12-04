@@ -35,7 +35,7 @@ class Main {
 
                     game.draw()
 
-                    Thread.sleep(10)
+                    Thread.sleep(50)
                 }
             }
 

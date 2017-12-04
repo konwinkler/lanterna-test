@@ -2,7 +2,7 @@ package game
 
 import com.googlecode.lanterna.TextColor
 
-class Actor extends Drawable {
+abstract class Actor extends Drawable {
     int x = 0
     int y = 0
     private int offsetX
@@ -10,6 +10,7 @@ class Actor extends Drawable {
     boolean dirty = true
     protected boolean captured = false
     Game game
+    LinkedList<Action> actionQueue = new LinkedList<>()
 
     Actor(Game game) {
         this.game = game
@@ -43,8 +44,30 @@ class Actor extends Drawable {
         offsetY = 0
     }
 
-    def update() {
+    boolean update() {
+        if(actionQueue.empty) {
+            return false
+        }
 
+        switch (actionQueue.removeFirst()) {
+            case Action.MOVE_UP:
+                movement(position.withY(-1))
+                break
+            case Action.MOVE_LEFT:
+                movement(position.withX(-1))
+                break
+            case Action.MOVE_DOWN:
+                movement(position.withY(1))
+                break
+            case Action.MOVE_RIGHT:
+                movement(position.withX(1))
+                break
+            case Action.IDLE:
+                // do nothing
+                break
+        }
+
+        return true
     }
 
     Position getPosition() {
@@ -63,5 +86,9 @@ class Actor extends Drawable {
         this.captured = false
         icon = icon.withBackgroundColor(TextColor.ANSI.BLACK).withForegroundColor(TextColor.ANSI.WHITE)
         this.dirty = true
+    }
+
+    def addAction(Action action) {
+        this.actionQueue.add(action)
     }
 }

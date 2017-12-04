@@ -10,11 +10,15 @@
 - end game if sheep are in goal
 - can not walk through walls and other actors
 - set player and sheep in map string
-
-### TODO:
-
 - finish level 1
 - create level 2
 - transition to level 2
-- hold shift to move 5 times in a row
-- reset level if sheep is in capture area
+
+### TODO:
+
+- hold shift to move 5 times in a row (refactor update)
+- add a bark
+- add a wolf
+
+### bonus
+- display level counter

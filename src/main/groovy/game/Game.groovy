@@ -1,6 +1,7 @@
 package game
 
 import com.googlecode.lanterna.input.KeyStroke
+import com.googlecode.lanterna.input.KeyType
 import com.googlecode.lanterna.screen.Screen
 
 class Game {
@@ -50,38 +51,39 @@ class Game {
     }
 
     def handleInput(KeyStroke keyStroke) {
+        if(keyStroke == null) {
+            return
+        }
+
+        println("[DEBUG] handle input ${keyStroke}")
+
         def progress = false
-        int count = 1
-
-        if(keyStroke?.isShiftDown()) {
-            println("Shift!")
-            count = 5
-        }
-
-        // not able to loop over count here
-        switch (keyStroke) {
-            case KeyStroke.fromString('w'):
-                player.movement(player.position.withY(-1))
+        switch (keyStroke.keyType) {
+            case KeyType.ArrowUp:
+                player.addAction(Action.MOVE_UP)
                 progress = true
                 break
-            case KeyStroke.fromString('a'):
-                player.movement(player.position.withX(-1))
+            case KeyType.ArrowLeft:
+                player.addAction(Action.MOVE_LEFT)
                 progress = true
                 break
-            case KeyStroke.fromString('s'):
-                player.movement(player.position.withY(1))
+            case KeyType.ArrowDown:
+                player.addAction(Action.MOVE_DOWN)
                 progress = true
                 break
-            case KeyStroke.fromString('d'):
-                player.movement(player.position.withX(1))
+            case KeyType.ArrowRight:
+                player.addAction(Action.MOVE_RIGHT)
                 progress = true
                 break
-            case KeyStroke.fromString('l'):
-                catchAnimal()
-                progress = true
+            case KeyType.Character:
+                if(keyStroke == KeyStroke.fromString('l')) {
+                    catchAnimal()
+                    progress = true
+                }
                 break
         }
 
+        // Should this be decided in the update loop?
         if(progress) {
             herd.each {
                 it.randomMove()
@@ -103,8 +105,10 @@ class Game {
     }
 
     def update() {
-        herd.each {
-            it.update()
+        if(player.update()) {
+            herd.each {
+                it.update()
+            }
         }
     }
 
