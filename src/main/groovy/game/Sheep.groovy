@@ -18,6 +18,15 @@ class Sheep extends Actor {
         return c == symbol
     }
 
+    @Override
+    def executeMovement() {
+        super.executeMovement()
+
+        if(!captured) {
+            this.setBackground(game.map.tiles[x][y].icon.backgroundColor)
+        }
+    }
+
     def randomMove() {
         if(captured) {
             return
