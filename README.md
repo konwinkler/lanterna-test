@@ -13,10 +13,11 @@
 - finish level 1
 - create level 2
 - transition to level 2
+- hold down arrow keys
 
 ### TODO:
 
-- hold shift to move 5 times in a row (refactor update)
+- add more/better levels
 - add a bark
 - add a wolf
 

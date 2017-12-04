@@ -21,6 +21,12 @@ class Main {
             screen.setCursorPosition(null)
 
             Iterator<List> it = Levels.all.iterator()
+
+            //skip levels
+//            it.next()
+//            it.next()
+//            it.next()
+
             while(it.hasNext()) {
                 screen.clear()
                 screen.refresh()

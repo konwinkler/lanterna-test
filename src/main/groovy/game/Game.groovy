@@ -96,6 +96,8 @@ class Game {
             herd.each {
                 if (player.position.adjacent(it.position)) {
                     it.capture(player)
+
+                    return true
                 }
             }
         } else {
