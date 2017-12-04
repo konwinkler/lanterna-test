@@ -20,6 +20,8 @@ class Main {
 
             screen.setCursorPosition(null)
 
+            intro(screen)
+
             Iterator<List> it = Levels.all.iterator()
 
             //skip levels
@@ -43,6 +45,8 @@ class Main {
 
                     Thread.sleep(50)
                 }
+
+                screen.terminal.bell()
             }
 
             screen.clear()
@@ -56,4 +60,19 @@ class Main {
         }
     }
 
+    static def intro(TerminalScreen screen) {
+        screen.clear()
+        TextGraphics textGraphics = screen.newTextGraphics()
+        textGraphics.putString(5, 2, "Herd the sheep back to the barn")
+        textGraphics.putString(5, 4, "'@' this is you")
+        textGraphics.putString(5, 5, "'S' those are the sheep")
+        textGraphics.putString(5, 6, "bring them to the orange area")
+        textGraphics.putString(5, 8, "Controls:")
+        textGraphics.putString(5, 9, "Arrow Keys: move in that direction (can hold the key)")
+        textGraphics.putString(5, 10, "'l': leash/unleash a sheep (must be adjacent)")
+        textGraphics.putString(5, 12, "Press any key to continue")
+        screen.refresh()
+
+        screen.terminal.readInput()
+    }
 }

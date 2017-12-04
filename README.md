@@ -17,6 +17,7 @@
 
 ### TODO:
 
+- intro
 - add more/better levels
 - add a bark
 - add a wolf
