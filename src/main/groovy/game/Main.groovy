@@ -30,8 +30,6 @@ class Main {
 //            it.next()
 
             while(it.hasNext()) {
-                screen.clear()
-                screen.refresh()
 
                 def game = new Game(screen, it.next())
 
@@ -49,15 +47,20 @@ class Main {
                 screen.terminal.bell()
             }
 
-            screen.clear()
-            TextGraphics textGraphics = screen.newTextGraphics()
-            textGraphics.setForegroundColor(TextColor.ANSI.RED)
-            textGraphics.putString(10, 5, "You Win!")
-            screen.refresh()
+            outro(screen)
 
         } catch (Exception e) {
             e.printStackTrace()
         }
+    }
+
+    static void outro(TerminalScreen screen) {
+        screen.clear()
+        TextGraphics textGraphics = screen.newTextGraphics()
+        textGraphics.setForegroundColor(TextColor.ANSI.RED)
+        textGraphics.putString(10, 5, "You Win!")
+        textGraphics.putString(10, 10, "Thank you for playing")
+        screen.refresh()
     }
 
     static def intro(TerminalScreen screen) {
